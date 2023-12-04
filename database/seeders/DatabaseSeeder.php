@@ -9,6 +9,8 @@ use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Database\Seeder;
 
+use function Symfony\Component\String\b;
+
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -17,6 +19,26 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // \App\Models\User::factory(10)->create();
+        User::create([
+            'name' => 'Peguin',
+            'email' => 'penguin@gmail.com',
+            'password' => bcrypt('123456'),
+            'avatar' => 'https://cdn-icons-png.flaticon.com/512/4139/4139970.png',
+            'phone' => '0123456789',
+            'major' => 'Công nghệ thông tin Việt - Nhật',
+            'role' => 0,
+        ]);
+
+        User::create([
+            'name'=> 'Admin',
+            'email'=> 'admin@gmail.com',
+            'password'=> bcrypt('123456'),
+            'avatar' => 'https://cdn-icons-png.flaticon.com/512/4139/4139970.png',
+            'phone' => '0123456789',
+            'major' => 'Công nghệ thông tin Việt - Nhật',
+            'role' => 1,
+        ]);
+
         User::factory(10)->create();
         Product::factory(100)->create();
 
