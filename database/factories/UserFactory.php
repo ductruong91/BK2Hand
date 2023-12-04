@@ -24,8 +24,12 @@ class UserFactory extends Factory
             'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
-            'password' => static::$password ??= Hash::make('password'),
+            'password' => static::$password ??= Hash::make('123456'),
             'remember_token' => Str::random(10),
+            'avatar' => 'https://cdn-icons-png.flaticon.com/512/4139/4139970.png',
+            'phone' => $this->faker->phoneNumber(),
+            'major' => 'Công nghệ thông tin Việt - Nhật',
+            'role' => 0,
         ];
     }
 
