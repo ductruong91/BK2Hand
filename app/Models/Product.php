@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use App\Models\User;
-use Illuminate\Support\Str;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use App\Models\ProductImage;
 use App\Models\ProductVideo;
 use Illuminate\Database\Eloquent\Model;
@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Product extends Model
 {
-    use HasFactory;
+    use HasFactory, HasUuids;
 
     protected $fillable = [
         'name',
@@ -28,13 +28,13 @@ class Product extends Model
 
     public $incrementing = false;
 
-    public static function boot()
-    {
-        parent::boot();
-        static::creating(function (Product $product) {
-            $product->product_id = (string) Str::uuid();
-        });
-    }
+    // public static function boot()
+    // {
+    //     parent::boot();
+    //     static::creating(function (Product $product) {
+    //         $product->product_id = (string) Str::uuid();
+    //     });
+    // }
 
     public function user()
     {
