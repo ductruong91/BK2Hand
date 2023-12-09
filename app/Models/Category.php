@@ -2,31 +2,31 @@
 
 namespace App\Models;
 
-use Illuminate\Support\Str;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Category extends Model
 {
-    use HasFactory;
+    use HasFactory, HasUuids;
 
     protected $fillable = [
         'category_id',
         'name',
         'parent_id',
     ];
-
+    protected $primaryKey = 'category_id';
     protected $keyType = 'string';
 
     public $incrementing = false;
 
-    public static function boot()
-    {
-        parent::boot();
-        static::creating(function ($model) {
-            $model->category_id = (string) Str::uuid();
-        });
-    }
+    // public static function boot()
+    // {
+    //     parent::boot();
+    //     static::creating(function ($model) {
+    //         $model->category_id = (string) Str::uuid();
+    //     });
+    // }
     
     public function childCategories()
     {
