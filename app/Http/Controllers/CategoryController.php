@@ -9,9 +9,9 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        $categories = Category::whereNull('parent_id')->get();
+        $categories = Category::all()->whereNull('parent_id');
         foreach ($categories as $category) {
-            $category->childCategories;
+            $category->subCategories;
         }
         return response()->json([
             'data' => $categories,

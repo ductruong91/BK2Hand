@@ -28,14 +28,6 @@ class Product extends Model
 
     public $incrementing = false;
 
-    // public static function boot()
-    // {
-    //     parent::boot();
-    //     static::creating(function (Product $product) {
-    //         $product->product_id = (string) Str::uuid();
-    //     });
-    // }
-
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id', 'user_id');

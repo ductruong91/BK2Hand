@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Category extends Model
@@ -19,21 +20,13 @@ class Category extends Model
     protected $keyType = 'string';
 
     public $incrementing = false;
-
-    // public static function boot()
-    // {
-    //     parent::boot();
-    //     static::creating(function ($model) {
-    //         $model->category_id = (string) Str::uuid();
-    //     });
-    // }
     
-    public function childCategories()
+    public function subCategories()
     {
         return $this->hasMany(Category::class,'parent_id','category_id');
     }
 
-    public function parentCategory()
+    public function parent()
     {
         return $this->belongsTo(Category::class,'parent_id','category_id');
     }

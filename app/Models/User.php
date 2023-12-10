@@ -55,14 +55,6 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    // public static function boot()
-    // {
-    //     parent::boot();
-    //     static::creating(function (User $user) {
-    //         $user->user_id = (string) Str::uuid();
-    //     });
-    // }
-
     public function products()
     {
         return $this->hasMany(Product::class, 'user_id', 'user_id');

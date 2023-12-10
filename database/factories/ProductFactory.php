@@ -20,7 +20,7 @@ class ProductFactory extends Factory
         $randomDate = $this->faker->dateTimeBetween("-1 year");
         return [
             'name' => $this->faker->word,
-            'price' => $this->faker->numberBetween(1000, 50000),
+            'price' => $this->faker->numberBetween(100, 10000) * 1000,
             'time_used' => $this->faker->word,
             'description' => $this->faker->sentence,
             'status' => $this->faker->randomElement([0, 1, 2]),
