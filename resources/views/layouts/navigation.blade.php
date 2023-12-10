@@ -2,7 +2,7 @@
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-24">
-            <div class="flex">
+            <div class="flex items-center">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('homepage') }}">
@@ -10,9 +10,10 @@
                     </a>
                 </div>
 
-                <button class="h-[55px] shrink-0 self-center ml-10 text-lg w-[122px] flex justify-center bg-white py-3 px-4 rounded-lg">
+                {{-- <button class="h-[55px] shrink-0 self-center ml-10 text-lg w-[122px] flex justify-center bg-white py-3 px-4 rounded-lg">
                     <span class="block">{{ __('Danh mục') }}</span>
-                </button>
+                </button> --}}
+                <livewire:category-select />
             </div>
 
             <div class="flex items-center">
@@ -21,7 +22,7 @@
                         <input name="keyword" type="text" placeholder="Search something..." 
                             class="border-none focus:ring-0 focus:ring-offset-0 w-[500px]"
                             value="{{ request('keyword') }}"/>
-                        <button class="text-2xl hover:text-gray-600">
+                        <button class="text-2xl hover:text-gray-600 ml-4">
                             <i class="fi fi-bs-search"></i>
                         </button>
                     </div>

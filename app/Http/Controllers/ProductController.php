@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
-use App\Models\Product;
 use Exception;
+use App\Models\Product;
+use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
@@ -42,19 +43,33 @@ class ProductController extends Controller
     public function search(Request $request)
     {
         try {
-            $products = Product::where('name', 'like', '%'. $request->keyword .'%')
-                ->get();
+            $products = DB::table('products')
+                ->select('products.*', 'categories.name as category_name')
+                ->join('product_category', 'products.product_id', '=', 'product_category.product_id')
+                ->join('categories', 'product_category.category_id', '=', 'categories.category_id')
+                ->when($request->keyword, function ($query) use ($request) {
+                    $query->where('products.name','like','%'. $request->keyword . '%');
+                })
+                ->when($request->cid, function ($query) use ($request) {
+                    $query->where('categories.category_id', '=', $request->cid);
+                })
+                ->paginate(6);
             
             return view('search', [
-                'products' => $products,
+                'products' => $products->appends(request()->except('page')),
             ]);
         } catch(Exception $e)
         {
             return response()->json([
-                'message' => 'Server Error',
+                'message' => $e->getMessage(),
                 'success' => false,
             ], 500);
         }
+    }
+
+    public function create()
+    {
+        //
     }
 
     public function store(Request $request)
@@ -62,7 +77,7 @@ class ProductController extends Controller
 
     }
 
-    public function show(Product $product)
+    public function show($id)
     {
 
     }

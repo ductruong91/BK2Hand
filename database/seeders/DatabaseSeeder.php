@@ -40,101 +40,115 @@ class DatabaseSeeder extends Seeder
         ]);
 
         User::factory(10)->create();
-        Product::factory(100)->create();
 
         $largeCat1 = Category::create([
             'name' => 'Xe cộ',
+            'thumbnail_url' => '/storage/xe-co.png',
         ]);
         $largeCat2 = Category::create([
             'name'=> 'Đồ điện lạnh',
+            'thumbnail_url' => '/storage/do-dien-lanh.png',
         ]);
         $largeCat3 = Category::create([
             'name'=> 'Đồ nội thất',
+            'thumbnail_url' => '/storage/do-noi-that.png',
         ]);
         $largeCat4 = Category::create([
             'name'=> 'Đồ điện tử',
+            'thumbnail_url' => '/storage/do-dien-tu.png',
         ]);
         $largeCat5 = Category::create([
             'name' => 'Dụng cụ học tập',
+            'thumbnail_url' => '/storage/dung-cu-hoc-tap.png',
         ]);
         $largeCat6 = Category::create([
             'name' => 'Thú cưng',
+            'thumbnail_url' => '/storage/thu-cung.png',
         ]);
         $largeCat7 = Category::create([
             'name' => 'Quần áo',
+            'thumbnail_url' => '/storage/quan-ao.png',
         ]);
         $largeCat8 = Category::create([
             'name' => 'Khác',
+            'thumbnail_url' => '/storage/khac.png',
         ]);
-        $largeCat1->childCategories()->create([
+        $largeCat1->subCategories()->create([
             'name' => 'Xe đạp',
         ]);
-        $largeCat1->childCategories()->create([
+        $largeCat1->subCategories()->create([
             'name' => 'Xe máy',
         ]);
-        $largeCat1->childCategories()->create([
+        $largeCat1->subCategories()->create([
             'name' => 'Xe điện',
         ]);
-        $largeCat1->childCategories()->create([
+        $largeCat1->subCategories()->create([
             'name' => 'Phụ tùng',
         ]);
-        $largeCat2->childCategories()->create([
+        $largeCat2->subCategories()->create([
             'name'=> 'Tivi',
         ]);
-        $largeCat2->childCategories()->create([
+        $largeCat2->subCategories()->create([
             'name'=> 'Tủ lạnh',
         ]);
-        $largeCat2->childCategories()->create([
+        $largeCat2->subCategories()->create([
             'name'=> 'Máy giặt',
         ]);
-        $largeCat2->childCategories()->create([
+        $largeCat2->subCategories()->create([
             'name'=> 'Nóng lạnh',
         ]);
-        $largeCat2->childCategories()->create([
+        $largeCat2->subCategories()->create([
             'name'=> 'Điều hoà',
         ]);
-        $largeCat2->childCategories()->create([
+        $largeCat2->subCategories()->create([
             'name'=> 'Quạt',
         ]);
-        $largeCat2->childCategories()->create([
+        $largeCat2->subCategories()->create([
             'name'=> 'Nồi cơm',
         ]);
-        $largeCat3->childCategories()->create([
+        $largeCat3->subCategories()->create([
             'name'=> 'Tủ',
         ]);
-        $largeCat3->childCategories()->create([
+        $largeCat3->subCategories()->create([
             'name'=> 'Giường',
         ]);
-        $largeCat3->childCategories()->create([
+        $largeCat3->subCategories()->create([
             'name'=> 'Bàn',
         ]);
-        $largeCat3->childCategories()->create([
+        $largeCat3->subCategories()->create([
             'name'=> 'Ghế',
         ]);
-        $largeCat3->childCategories()->create([
+        $largeCat3->subCategories()->create([
             'name'=> 'Giá',
         ]);
-        $largeCat4->childCategories()->create([
+        $largeCat4->subCategories()->create([
             'name'=> 'Điện thoại',
         ]);
-        $largeCat4->childCategories()->create([
+        $largeCat4->subCategories()->create([
             'name'=> 'Máy tính',
         ]);
-        $largeCat5->childCategories()->create([
+        $largeCat5->subCategories()->create([
             'name'=> 'Sách, tài liệu',
         ]);
-        $largeCat5->childCategories()->create([
+        $largeCat5->subCategories()->create([
             'name'=> 'Máy tính',
         ]);
-        $largeCat6->childCategories()->create([
+        $largeCat6->subCategories()->create([
             'name'=> 'Chó',
         ]);
-        $largeCat6->childCategories()->create([
+        $largeCat6->subCategories()->create([
             'name'=> 'Mèo',
         ]);
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+
+        $subCategories = Category::whereNotNull('parent_id')->get();
+        foreach ($subCategories as $category) {
+            for ($i = 0; $i < 10; $i++) {
+                $product = Product::factory()->create([
+                    'name' => $category->name . " " . fake()->word,
+                ]);
+                $product->categories()->attach($category->category_id);
+                $product->categories()->attach($category->parent->category_id);
+            }
+        }
     }
 }
