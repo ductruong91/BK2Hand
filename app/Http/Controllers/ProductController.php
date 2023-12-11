@@ -41,17 +41,31 @@ class ProductController extends Controller
     }
 
     public function search(Request $request)
-    {
+    {   
+        $regExp = [
+            '/[aáảàạãăắẳằặẵâấẩầậẫ]/iu' => '[aáảàạãăắẳằặẵâấẩầậẫ]',
+            '/[eéẻèẹẽêếểềệễ]/iu' => '[eéẻèẹẽêếểềệễ]',
+            '/[iíỉìịĩ]/iu' => '[iíỉìịĩ]',
+            '/[uúủùụũưứửừựữ]/iu' => '[uúủùụũưứửừựữ]',
+            '/[oóỏòọõôốổồộỗơớởờợỡ]/iu' => '[oóỏòọõôốổồộỗơớởờợỡ]',
+            '/[yýỷỳỵỹ]/iu' => '[yýỷỳỵỹ]',
+            '/[dđ]/iu' => '[dđ]',
+        ];
+
         try {
-            $products = DB::table('products')
-                ->select('products.*', 'categories.name as category_name')
-                ->join('product_category', 'products.product_id', '=', 'product_category.product_id')
-                ->join('categories', 'product_category.category_id', '=', 'categories.category_id')
-                ->when($request->keyword, function ($query) use ($request) {
-                    $query->where('products.name','like','%'. $request->keyword . '%');
+            $result = $request->keyword;
+            foreach ($regExp as $key => $value) {
+                $result = preg_replace($key, $value, $result);
+            }
+
+            $products = Product::with('categories')
+                ->when($request->keyword, function ($query) use ($request, $result) {
+                    $query->where('products.name', 'REGEXP', $result);
                 })
                 ->when($request->cid, function ($query) use ($request) {
-                    $query->where('categories.category_id', '=', $request->cid);
+                    $query->whereHas('categories', function ($query) use ($request) {
+                        $query->where('categories.category_id', $request->cid);
+                    });
                 })
                 ->paginate(6);
             
