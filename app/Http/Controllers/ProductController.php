@@ -67,6 +67,23 @@ class ProductController extends Controller
                         $query->where('categories.category_id', $request->cid);
                     });
                 })
+                ->when($request->priceRange != 0, function ($query) use ($request) {
+                    $between = [
+                        '1' => ['0','100000'],
+                        '2' => ['100000','500000'],
+                        '3' => ['500000','1000000'],
+                        '4' => ['1000000', '99999999999'],
+                    ];
+                    $query->whereRaw('CONVERT(price, SIGNED) BETWEEN ? and ?', $between[$request->priceRange]);
+                })
+                ->when($request->sortByPrice != 0, function ($query) use ($request) {
+                    if ($request->sortByPrice == 1) $query->orderByRaw('CONVERT(products.price, SIGNED) asc');
+                    else $query->orderByRaw('CONVERT(products.price, SIGNED) desc');
+                })
+                ->when($request->sortByCreatedAt != 0, function ($query) use ($request) {
+                    if ($request->sortByCreatedAt == 1) $query->orderBy('created_at', 'asc');
+                    else $query->orderBy('created_at', 'desc');
+                })
                 ->paginate(6);
             
             return view('search', [
