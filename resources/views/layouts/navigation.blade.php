@@ -22,6 +22,7 @@
                         <input name="keyword" type="text" placeholder="Search something..." 
                             class="border-none focus:ring-0 focus:ring-offset-0 w-[500px]"
                             value="{{ request('keyword') }}"/>
+                        <input name="cid" type="hidden" value="{{ request('cid') }}"/>
                         <button class="text-2xl hover:text-gray-600 ml-4">
                             <i class="fi fi-bs-search"></i>
                         </button>
