@@ -86,6 +86,14 @@
                     element.style.display = element.style.display == 'none' ? 'block' : 'none'; 
                 }
                 const priceRangeOptions = priceRangeSelector.querySelectorAll('div')
+
+                for (const option of priceRangeOptions)
+                {
+                    if (option.getAttribute('data-price-range') == url.searchParams.get('priceRange')) {
+                        priceRangeTitleElement.innerHTML = `${priceRangeStartTitle}: ${option.innerHTML}`;
+                    }
+                }
+
                 priceRangeOptions.forEach((element) => element.addEventListener('click', () => {
                     priceRangeTitleElement.innerHTML = `${priceRangeStartTitle}: ${element.innerHTML}`;
                     url.searchParams.set('priceRange', element.getAttribute('data-price-range'))
@@ -111,6 +119,24 @@
                 })
 
                 const sortByPrice = document.getElementById('sortByPrice');
+                switch (url.searchParams.get('sortByPrice')) {
+                    case '0':
+                        sortByPrice.querySelector('div.down').style.display = 'none';
+                        sortByPrice.querySelector('div.up').style.display = 'none';
+                        break;
+                    case '1':
+                        sortByPrice.querySelector('div.down').style.display = 'none';
+                        sortByPrice.querySelector('div.up').style.display = 'block';
+                        break;
+                    case '2':
+                        sortByPrice.querySelector('div.down').style.display = 'block';
+                        sortByPrice.querySelector('div.up').style.display = 'none';
+                        break;
+                    default:
+                        sortByPrice.querySelector('div.down').style.display = 'none';
+                        sortByPrice.querySelector('div.up').style.display = 'none';
+                        break;
+                }
                 sortByPrice.addEventListener('click', () => {
                     switch (url.searchParams.get('sortByPrice'))
                     {
@@ -140,6 +166,24 @@
                     }
                 })
                 const sortByCreatedAt = document.getElementById("sortByCreatedAt")
+                switch (url.searchParams.get('sortByCreatedAt')) {
+                    case '0':
+                        sortByCreatedAt.querySelector('div.down').style.display = 'none';
+                        sortByCreatedAt.querySelector('div.up').style.display = 'none';
+                        break;
+                    case '1':
+                        sortByCreatedAt.querySelector('div.down').style.display = 'none';
+                        sortByCreatedAt.querySelector('div.up').style.display = 'block';
+                        break;
+                    case '2':
+                        sortByCreatedAt.querySelector('div.down').style.display = 'block';
+                        sortByCreatedAt.querySelector('div.up').style.display = 'none';
+                        break;
+                    default:
+                        sortByCreatedAt.querySelector('div.down').style.display = 'none';
+                        sortByCreatedAt.querySelector('div.up').style.display = 'none';
+                        break;
+                }
                 sortByCreatedAt.addEventListener('click', () => {
                     switch (url.searchParams.get('sortByCreatedAt'))
                     {
