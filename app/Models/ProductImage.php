@@ -15,7 +15,8 @@ class ProductImage extends Model
         'image_url',
         'product_id',
     ];
-
+    protected $table = 'product_images';
+    protected $primaryKey = 'image_id';
     protected $keyType = 'string';
 
     public $incrementing = false;

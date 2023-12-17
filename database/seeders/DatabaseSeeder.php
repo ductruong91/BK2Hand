@@ -73,6 +73,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'Khác',
             'thumbnail_url' => '/storage/khac.png',
         ]);
+
         $largeCat1->subCategories()->create([
             'name' => 'Xe đạp',
         ]);
@@ -98,7 +99,7 @@ class DatabaseSeeder extends Seeder
             'name'=> 'Nóng lạnh',
         ]);
         $largeCat2->subCategories()->create([
-            'name'=> 'Điều hoà',
+            'name'=> 'Điều hòa',
         ]);
         $largeCat2->subCategories()->create([
             'name'=> 'Quạt',
@@ -148,6 +149,95 @@ class DatabaseSeeder extends Seeder
                 ]);
                 $product->categories()->attach($category->category_id);
                 $product->categories()->attach($category->parent->category_id);
+                if ($category->name === 'Xe đạp') {
+                    $product->images()->create([
+                        'image_url'=>'https://bizweb.dktcdn.net/100/091/797/products/img-8390-9cb77712-1fc6-4e8c-b537-595f517bcdc5.jpg?v=1625383868547',
+                ]);
+                }elseif ($category->name === 'Xe máy'){
+                    $product->images()->create([
+                        'image_url'=>'https://imagev3.vietnamplus.vn/w1000/Uploaded/2023/mzdic/2023_02_21/SH350i2102.jpg.webp',
+                    ]);
+                }elseif ($category->name === 'Xe điện'){
+                    $product->images()->create([
+                        'image_url'=>'https://giantvietnam.vn/wp-content/uploads/2022/03/2021-ELEM-133DS-XE-DIEN-GIANT-new2-4.jpg',
+                    ]);
+                }elseif ($category->name === 'Phụ tùng'){
+                    $product->images()->create([
+                        'image_url'=>'https://cartop.vn/wp-content/uploads/2017/07/nhan-biet-phu-tung-o-to-chinh-hang.jpg',
+                    ]);
+                }elseif ($category->name === 'Tivi'){
+                    $product->images()->create([
+                        'image_url'=>'https://cdn11.dienmaycholon.vn/filewebdmclnew/public/userupload/files/news/tivi/tivi-xiaomi-a-l32m8p2sea.jpg',
+                    ]);
+                }elseif ($category->name === 'Tủ lạnh'){
+                    $product->images()->create([
+                        'image_url'=>'https://sanakyvietnam.net/wp-content/uploads/tu-lanh-sanaky-vh-209hyn-1.jpg',
+                    ]);
+                }elseif ($category->name === 'Máy giặt'){
+                    $product->images()->create([
+                        'image_url'=>'https://hangdienmaygiare.com/images/products/2023/03/19/large/may-giat-electrolux-inverter-10-kg-ewf1024d3wb-1_1679217981.jpg',
+                    ]);
+                }elseif ($category->name === 'Nóng lạnh'){
+                    $product->images()->create([
+                        'image_url'=>'https://dienlanhkimphu.com/wp-content/uploads/2018/09/K0YPfR.png',
+                    ]);
+                }elseif ($category->name === 'Điều hòa'){
+                    $product->images()->create([
+                        'image_url'=>'https://dienmaythienphu.vn/wp-content/uploads/2022/01/treotuong-2604-1622626429.jpg',
+                    ]);
+                }elseif ($category->name === 'Quạt'){
+                    $product->images()->create([
+                        'image_url'=>'https://kangaroo.vn/wp-content/uploads/Quat-sac-dien-kangaroo-kg735.jpg',
+                    ]);
+                }elseif ($category->name === 'Nồi cơm'){
+                    $product->images()->create([
+                        'image_url'=>'https://cdn.tgdd.vn/Products/Images/1922/247196/255126-600x600.jpg',
+                    ]);
+                }elseif ($category->name === 'Tủ'){
+                    $product->images()->create([
+                        'image_url'=>'https://file.hstatic.net/1000078439/file/23_3426f2407531418bb5a714b8207ae7c5.jpg',
+                    ]);
+                }elseif ($category->name === 'Giường'){
+                    $product->images()->create([
+                        'image_url'=>'https://thegioinem.com/upload/images/giuong-sat-kim-thanh-kts09-1547.jpg',
+                    ]);
+                }elseif ($category->name === 'Bàn'){
+                    $product->images()->create([
+                        'image_url'=>'https://bangtot.vn/wp-content/uploads/2019/01/ban-go-mam-non-hinh-chu-nhat-1.jpg',
+                    ]);
+                }elseif ($category->name === 'Ghế'){
+                    $product->images()->create([
+                        'image_url'=>'https://noithatthanhminh.com/wp-content/uploads/2020/08/bo-ban-ghe-eames-4-ghe-mau-trang-4.jpg',
+                    ]);
+                }elseif ($category->name === 'Giá'){
+                    $product->images()->create([
+                        'image_url'=>'https://www.homebase.vn/image/cache/catalog/product/ho/196319-700x802.jpg',
+                    ]);
+                }elseif ($category->name === 'Điện thoại'){
+                    $product->images()->create([
+                        'image_url'=>'https://cdn.tgdd.vn/ValueIcons/iphone.jpg',
+                    ]);
+                }elseif ($category->name === 'Máy tính'){
+                    $product->images()->create([
+                        'image_url'=>'https://cdn.tgdd.vn/Files/2022/08/12/1455692/co-nen-mua-may-tinh-de-ban-cu-khong-kinh-nghiem-c-15.jpg',
+                    ]);
+                }elseif ($category->name === 'Sách, tài liệu'){
+                    $product->images()->create([
+                        'image_url'=>'https://tiki.vn/blog/wp-content/uploads/2023/08/thumb-12.jpg',
+                    ]);
+                }elseif ($category->name === 'Máy tính'){
+                    $product->images()->create([
+                        'image_url'=>'https://vanphongphamlocphat.com/wp-content/uploads/2022/04/May-tinh-hoc-sinh-Casio-FX-580VN-X.jpg',
+                    ]);
+                }elseif ($category->name === 'Chó'){
+                    $product->images()->create([
+                        'image_url'=>'https://tapchithucung.vn/Uploads/images/nhung-giong-cho-it-bi-benh.jpg',
+                    ]);
+                }elseif ($category->name === 'Mèo'){
+                    $product->images()->create([
+                        'image_url'=>'https://cdn.tgdd.vn/Files/2021/04/22/1345443/dac-diem-nhan-dien-cach-nuoi-meo-anh-long-ngan-202104221529108326.jpg',
+                    ]);
+                }   
             }
         }
     }
