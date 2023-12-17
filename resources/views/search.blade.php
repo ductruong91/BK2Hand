@@ -3,8 +3,8 @@
         <div class="flex justify-center items-center space-x-5">
 
             <div class="relative" onclick="toggleDropdown()">
-                <div class="py-1 px-1 bg-white text-base border border-[rgba(0,0,0,0.5)] rounded-sm inline-flex items-center">
-                    <span id="priceRangeTitle" class="block leading-4 font-medium text-base px-1">{{ __('Giá')}}</span><i class= "fi fi-rr-caret-down px-2" ></i>
+                <div class="py-2 px-7 bg-white text-base border border-[rgba(0,0,0,0.5)] rounded-md inline-flex items-center">
+                    <span id="priceRangeTitle" class="block leading-4 font-medium text-base px-2">{{ __('Giá')}}</span><i class= "fi fi-rr-caret-down px-2" ></i>
                 </div>
                 <div class="absolute z-50 mt-2 w-32 rounded-sm shadow-lg">
                     <div class="ring-1 ring-black ring-opacity-5 bg-white" id="priceRangeSelector" style="display:none;">
@@ -18,7 +18,7 @@
             </div>
 
             <!-- Sort by price -->
-            <div id="sortByPrice" class="inline-flex items-center px-2 py-2 border border-[rgba(0,0,0,0.5)] text-base leading-4 font-medium rounded-sm text-black dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
+            <!-- <div id="sortByPrice" class="inline-flex items-center px-7 py-3 border border-[rgba(0,0,0,0.5)] text-base leading-4 font-medium rounded-md text-black dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
                 <div>{{ __('Xếp theo giá') }}</div>
                 <div class="ms-1 up" style="display: none;">
                     <i class= "fi fi-ss-arrow-small-up"></i>
@@ -26,14 +26,26 @@
                 <div class="ms-1 down" style="display: none;">
                     <i class= "fi fi-ss-arrow-small-down"></i>
                 </div>
+            </div> -->
+            <div class="relative" onclick="togglePrice()">
+                <div class="py-2 px-7 bg-white text-base border border-[rgba(0,0,0,0.5)] rounded-md inline-flex items-center">
+                    <span id="sortPriceTitle" class="block leading-4 font-medium text-base px-2">{{ __('Thứ tự sắp xếp') }}</span><i class= "fi fi-rr-caret-down px-2" ></i>
+                </div>
+                <div class="absolute z-50 mt-2 w-52 rounded-sm shadow-lg">
+                    <div class="ring-1 ring-black ring-opacity-5 bg-white" id="sortPriceSelector" style="display:none;">
+                        <div class="text-sm py-1 px-2" data-sort-price="0">{{ __('Không')}}</div>
+                        <div class="text-sm py-1 px-2" data-sort-price="1">{{ __('Tăng dần')}}<i class= "fi fi-ss-arrow-small-up"></i></div>
+                        <div class="text-sm py-1 px-2" data-sort-price="2">{{ __('Giảm dần')}}<i class= "fi fi-ss-arrow-small-down"></i></div>
+                    </div>
+                </div>
             </div>
 
             <!-- Time used -->
             <div class="relative" onclick="toggleTimeUsed()">
-                <div class="py-1 px-1 bg-white text-base border border-[rgba(0,0,0,0.5)] rounded-sm inline-flex items-center">
-                    <span id="timeUsedTitle" class="block leading-4 font-medium text-base px-1">{{ __('Thời gian') }}</span><i class= "fi fi-rr-caret-down px-2" ></i>
+                <div class="py-2 px-7 bg-white text-base border border-[rgba(0,0,0,0.5)] rounded-md inline-flex items-center">
+                    <span id="timeUsedTitle" class="block leading-4 font-medium text-base px-2">{{ __('Thời gian') }}</span><i class= "fi fi-rr-caret-down px-2" ></i>
                 </div>
-                <div class="absolute z-50 mt-2 w-48 rounded-sm shadow-lg">
+                <div class="absolute z-50 mt-2 w-44 rounded-sm shadow-lg">
                     <div class="ring-1 ring-black ring-opacity-5 bg-white" id="timeUsedSelector" style="display:none;">
                         <div class="text-sm py-1 px-2" data-time-used="0">{{ __('Không')}}</div>
                         <div class="text-sm py-1 px-2" data-time-used="1">{{ __('Dưới 1 tháng')}}</div>
@@ -47,7 +59,7 @@
             </div>
 
             <!-- Sort by creation date -->
-            <div id="sortByCreatedAt" class="inline-flex items-center px-2 py-2 border border-[rgba(0,0,0,0.5)] text-base leading-4 font-medium rounded-sm text-black dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
+            <!-- <div id="sortByCreatedAt" class="inline-flex items-center px-7 py-3 border border-[rgba(0,0,0,0.5)] text-base leading-4 font-medium rounded-md text-black dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
                 <div>{{ __('Xếp theo ngày đăng') }}</div>
                 <div class="ms-1 down" style="display: none;">
                     <i class= "fi fi-ss-arrow-small-down"></i>
@@ -55,11 +67,11 @@
                 <div class="ms-1 up" style="display: none;">
                     <i class= "fi fi-ss-arrow-small-up"></i>
                 </div>
-            </div>
+            </div> -->
 
             <!-- Filter -->
-            <button id="submitBtn" class="inline-flex items-center py-2 px-2 border border-[rgba(0,0,0,0.5)] text-base leading-4 font-medium rounded-sm text-black dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
-                <div class="mr-1 text-base">
+            <button id="submitBtn" class="inline-flex items-center py-2 px-7 border border-[rgba(0,0,0,0.5)] text-base leading-4 font-medium rounded-md text-black dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
+                <div class="mr-1 text-base px-2">
                     <i class= "fi fi-rs-filter" ></i>
                 </div>
             
@@ -67,7 +79,7 @@
             </button>
 
             <!-- Reset Filter -->
-            <button id="resetBtn" class="inline-flex items-center py-3 px-2 border border-[rgba(0,0,0,0.5)] text-base leading-4 font-medium rounded-sm text-black dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
+            <button id="resetBtn" class="inline-flex items-center py-3 px-7 border border-[rgba(0,0,0,0.5)] text-base leading-4 font-medium rounded-md text-black dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
                 <div>{{ __('Khôi phục lọc') }}</div>
             </button>
 
@@ -75,10 +87,15 @@
                 const url = new URL(window.location.href);
                 const priceRangeStartTitle = "Giá";
                 const timeUsedTitle = "Thời gian";
+                const sortPriceTitle = "Thứ tự sắp xếp";
                 const priceRangeTitleElement = document.getElementById('priceRangeTitle')
                 const priceRangeSelector = document.getElementById('priceRangeSelector')
                 function toggleDropdown() {
                     const element = document.getElementById('priceRangeSelector')
+                    element.style.display = element.style.display == 'none' ? 'block' : 'none'; 
+                }
+                function togglePrice() {
+                    const element = document.getElementById('sortPriceSelector')
                     element.style.display = element.style.display == 'none' ? 'block' : 'none'; 
                 }
                 function toggleTimeUsed() {
@@ -97,6 +114,11 @@
                 priceRangeOptions.forEach((element) => element.addEventListener('click', () => {
                     priceRangeTitleElement.innerHTML = `${priceRangeStartTitle}: ${element.innerHTML}`;
                     url.searchParams.set('priceRange', element.getAttribute('data-price-range'))
+                    window.history.pushState({}, "", url)
+                }))
+                document.getElementById('sortPriceSelector').querySelectorAll('div').forEach((element) => element.addEventListener('click', () => {
+                    document.getElementById('sortPriceTitle').innerHTML = `${sortPriceTitle}: ${element.innerHTML}`
+                    url.searchParams.set('sortByPrice', element.getAttribute('data-sort-price'))
                     window.history.pushState({}, "", url)
                 }))
                 document.getElementById('timeUsedSelector').querySelectorAll('div').forEach((element) => element.addEventListener('click', () => {
@@ -217,9 +239,9 @@
     </x-slot>
     <div class="py-10">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="grid grid-cols-2 justify-items-center gap-y-4">
+            <div class="grid grid-cols-2 justify-items-center gap-x-8 gap-y-4">
                 @foreach($products as $product)
-                <a class="cursor-pointer w-full flex justify-center" href="{{ route('product.show', ['id' => $product->product_id]) }}">
+                <a class="cursor-pointer max-w-[507px] w-full flex justify-center" href="{{ route('product.show', ['id' => $product->product_id]) }}">
                     <div class="flex items-start py-5 px-5 bg-white rounded-2xl border border-[#897272] max-w-[507px] hover:scale-105 w-full">
                         <div class="w-[174px] h-[156px] flex items-center">
                             <img class="max-w-full max-h-full mx-auto my-auto" src="{{$product->images->first()->image_url}}"/>

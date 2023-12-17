@@ -7,10 +7,10 @@
                 <div class="pt-3 pb-2">
                     <div class="flex items-center justify-evenly">
                         @foreach($categories as $category)
-                        <a class="cursor-pointer" href="{{ route('product.search', ['cid' => $category->category_id]) }}">
+                        <a class="cursor-pointer hover:scale-105" href="{{ route('product.search', ['cid' => $category->category_id]) }}">
                             <div class="flex flex-col items-center">
                                 <div class="w-[104px] h-[104px]">
-                                    <img class="max-w-full min-h-full border border-[#D9C2C2] object-scale-down rounded-2xl" 
+                                    <img class="max-w-full min-h-full object-scale-down rounded-2xl" 
                                         src="{{ $category->thumbnail_url }}">
                                 </div>
                                 <span class="text-base mt-1">{{ $category->name }}</span>
