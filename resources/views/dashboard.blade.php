@@ -27,7 +27,7 @@
                 <a class="border border-[#897272] bg-white block pt-4 hover:scale-105"
                     href="{{ route('product.show', ['id' => $product->product_id]) }}">
                     <div class="w-[174px] h-[156px] mx-auto mt-4">
-                        <img class="max-w-full max-h-full mx-auto" src="https://www.infobike.hu/media/pictures/1274046656honda_anf125_2004_7.jpg"/>
+                        <img class="max-w-full max-h-full mx-auto" src="{{$product->images->first()->image_url}}"/>
                     </div>
                     <div class="flex flex-col ml-3 mb-1">
                         <span class="text-lg">{{ $product->name }}</span>

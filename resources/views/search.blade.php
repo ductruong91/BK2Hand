@@ -222,7 +222,7 @@
                 <a class="cursor-pointer w-full flex justify-center" href="{{ route('product.show', ['id' => $product->product_id]) }}">
                     <div class="flex items-start py-5 px-5 bg-white rounded-2xl border border-[#897272] max-w-[507px] hover:scale-105 w-full">
                         <div class="w-[174px] h-[156px] flex items-center">
-                            <img class="max-w-full max-h-full mx-auto my-auto" src="https://www.infobike.hu/media/pictures/1274046656honda_anf125_2004_7.jpg"/>
+                            <img class="max-w-full max-h-full mx-auto my-auto" src="{{$product->images->first()->image_url}}"/>
                         </div>
                         <div class="flex ml-5 flex-col">
                             <span class="text-2xl block">{{ $product->name }}</span>
