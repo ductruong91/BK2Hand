@@ -21,7 +21,7 @@ class ProductFactory extends Factory
         return [
             'name' => $this->faker->word,
             'price' => $this->faker->numberBetween(10, 10000) * 1000,
-            'time_used' => $this->faker->word,
+            'time_used' => $this->faker->numberBetween(1, 36),
             'description' => $this->faker->sentence,
             'status' => $this->faker->randomElement([0, 1, 2]),
             'user_id' => User::all()->random()->user_id,

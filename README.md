@@ -33,7 +33,11 @@ php artisan key:generate
 3. Migrate and seed dummy data
 
 ```bash
-php artisan migrate --seed
+php artisan migrate --seed --force
+```
+4. Storage link
+```bash
+php artisan storage:link
 ```
 ## Usage
 

@@ -23,7 +23,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'Peguin',
             'email' => 'penguin@gmail.com',
             'password' => bcrypt('123456'),
-            'avatar' => 'https://cdn-icons-png.flaticon.com/512/4139/4139970.png',
+            'avatar' => 'https://ps.w.org/user-avatar-reloaded/assets/icon-128x128.png?rev=2540745',
             'phone' => '0123456789',
             'major' => 'Công nghệ thông tin Việt - Nhật',
             'role' => 0,
@@ -33,7 +33,7 @@ class DatabaseSeeder extends Seeder
             'name'=> 'Admin',
             'email'=> 'admin@gmail.com',
             'password'=> bcrypt('123456'),
-            'avatar' => 'https://cdn-icons-png.flaticon.com/512/4139/4139970.png',
+            'avatar' => 'https://www.svgrepo.com/show/70079/administrator.svg',
             'phone' => '0123456789',
             'major' => 'Công nghệ thông tin Việt - Nhật',
             'role' => 1,
@@ -151,8 +151,8 @@ class DatabaseSeeder extends Seeder
                 $product->categories()->attach($category->parent->category_id);
                 if ($category->name === 'Xe đạp') {
                     $product->images()->create([
-                        'image_url'=>'https://bizweb.dktcdn.net/100/091/797/products/img-8390-9cb77712-1fc6-4e8c-b537-595f517bcdc5.jpg?v=1625383868547',
-                ]);
+                        'image_url' => 'https://bizweb.dktcdn.net/100/091/797/products/img-8390-9cb77712-1fc6-4e8c-b537-595f517bcdc5.jpg?v=1625383868547',
+                    ]);
                 }elseif ($category->name === 'Xe máy'){
                     $product->images()->create([
                         'image_url'=>'https://imagev3.vietnamplus.vn/w1000/Uploaded/2023/mzdic/2023_02_21/SH350i2102.jpg.webp',
