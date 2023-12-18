@@ -16,26 +16,17 @@
                     </div>
                 </div>
             </div>
-
-            <!-- Sort by price -->
-            <!-- <div id="sortByPrice" class="inline-flex items-center px-7 py-3 border border-[rgba(0,0,0,0.5)] text-base leading-4 font-medium rounded-md text-black dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
-                <div>{{ __('Xếp theo giá') }}</div>
-                <div class="ms-1 up" style="display: none;">
-                    <i class= "fi fi-ss-arrow-small-up"></i>
-                </div>
-                <div class="ms-1 down" style="display: none;">
-                    <i class= "fi fi-ss-arrow-small-down"></i>
-                </div>
-            </div> -->
             <div class="relative" onclick="togglePrice()">
                 <div class="py-2 px-7 bg-white text-base border border-[rgba(0,0,0,0.5)] rounded-md inline-flex items-center">
-                    <span id="sortPriceTitle" class="block leading-4 font-medium text-base px-2">{{ __('Thứ tự sắp xếp') }}</span><i class= "fi fi-rr-caret-down px-2" ></i>
+                    <span id="sortPriceTitle" class="block leading-4 font-medium text-base px-2">{{ __('Sắp xếp') }}</span><i class= "fi fi-rr-caret-down px-2" ></i>
                 </div>
                 <div class="absolute z-50 mt-2 w-52 rounded-sm shadow-lg">
                     <div class="ring-1 ring-black ring-opacity-5 bg-white" id="sortPriceSelector" style="display:none;">
                         <div class="text-sm py-1 px-2" data-sort-price="0">{{ __('Không')}}</div>
-                        <div class="text-sm py-1 px-2" data-sort-price="1">{{ __('Tăng dần')}}<i class= "fi fi-ss-arrow-small-up"></i></div>
-                        <div class="text-sm py-1 px-2" data-sort-price="2">{{ __('Giảm dần')}}<i class= "fi fi-ss-arrow-small-down"></i></div>
+                        <div class="text-sm py-1 px-2" data-sort-price="1">{{ __('Giá tăng dần')}}<i class= "fi fi-ss-arrow-small-up"></i></div>
+                        <div class="text-sm py-1 px-2" data-sort-price="2">{{ __('Giá giảm dần')}}<i class= "fi fi-ss-arrow-small-down"></i></div>
+                        <div class="text-sm py-1 px-2" data-sort-price="3">{{ __('Ngày đăng gần nhất')}}</div>
+                        <div class="text-sm py-1 px-2" data-sort-price="4">{{ __('Ngày đăng xa nhất')}}</div>
                     </div>
                 </div>
             </div>
@@ -48,12 +39,11 @@
                 <div class="absolute z-50 mt-2 w-44 rounded-sm shadow-lg">
                     <div class="ring-1 ring-black ring-opacity-5 bg-white" id="timeUsedSelector" style="display:none;">
                         <div class="text-sm py-1 px-2" data-time-used="0">{{ __('Không')}}</div>
-                        <div class="text-sm py-1 px-2" data-time-used="1">{{ __('Dưới 1 tháng')}}</div>
-                        <div class="text-sm py-1 px-2" data-time-used="2">{{ __('Nhiều hơn 1 tháng')}}</div>
-                        <div class="text-sm py-1 px-2" data-time-used="3">{{ __('Dưới 6 tháng')}}</div>
-                        <div class="text-sm py-1 px-2" data-time-used="4">{{ __('6 tháng - 12 tháng')}}</div>
-                        <div class="text-sm py-1 px-2" data-time-used="5">{{ __('1 năm - 1.5 năm')}}</div>
-                        <div class="text-sm py-1 px-2" data-time-used="6">{{ __('1.5 năm - 2 năm')}}</div>
+                        <div class="text-sm py-1 px-2" data-time-used="1">{{ __('Dưới 6 tháng')}}</div>
+                        <div class="text-sm py-1 px-2" data-time-used="2">{{ __('6 tháng - 12 tháng')}}</div>
+                        <div class="text-sm py-1 px-2" data-time-used="3">{{ __('1 năm - 1.5 năm')}}</div>
+                        <div class="text-sm py-1 px-2" data-time-used="4">{{ __('1.5 năm - 2 năm')}}</div>
+                        <div class="text-sm py-1 px-2" data-time-used="5">{{ __('Hơn 2 năm')}}</div>
                     </div>
                 </div>
             </div>
@@ -70,7 +60,7 @@
             </div> -->
 
             <!-- Filter -->
-            <button id="submitBtn" class="inline-flex items-center py-2 px-7 border border-[rgba(0,0,0,0.5)] text-base leading-4 font-medium rounded-md text-black dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
+            <button id="submitBtn" class="inline-flex items-center py-2 px-7 border border-[rgba(0,0,0,0.5)] hover:border-red-500 text-base leading-4 font-medium rounded-md text-black dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
                 <div class="mr-1 text-base px-2">
                     <i class= "fi fi-rs-filter" ></i>
                 </div>
@@ -79,7 +69,7 @@
             </button>
 
             <!-- Reset Filter -->
-            <button id="resetBtn" class="inline-flex items-center py-3 px-7 border border-[rgba(0,0,0,0.5)] text-base leading-4 font-medium rounded-md text-black dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
+            <button id="resetBtn" class="inline-flex items-center py-3 px-7 border border-[rgba(0,0,0,0.5)] hover:border-red-500 text-base leading-4 font-medium rounded-md text-black dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
                 <div>{{ __('Khôi phục lọc') }}</div>
             </button>
 
@@ -87,7 +77,7 @@
                 const url = new URL(window.location.href);
                 const priceRangeStartTitle = "Giá";
                 const timeUsedTitle = "Thời gian";
-                const sortPriceTitle = "Thứ tự sắp xếp";
+                const sortPriceTitle = "Sắp xếp";
                 const priceRangeTitleElement = document.getElementById('priceRangeTitle')
                 const priceRangeSelector = document.getElementById('priceRangeSelector')
                 function toggleDropdown() {
@@ -103,6 +93,16 @@
                     element.style.display = element.style.display == 'none' ? 'block' : 'none'; 
                 }
                 const priceRangeOptions = priceRangeSelector.querySelectorAll('div')
+                const sortTitle = document.getElementById('sortPriceTitle')
+                const sortPriceOptions = document.getElementById('sortPriceSelector').querySelectorAll('div')
+                const timeUsedOptions = document.getElementById('timeUsedSelector').querySelectorAll('div')
+                
+                for (const option of sortPriceOptions)
+                {
+                    if (option.getAttribute('data-sort-price') == url.searchParams.get('sortByPrice')) {
+                        sortTitle.innerHTML = `${sortPriceTitle}: ${option.innerHTML}`
+                    }
+                }
 
                 for (const option of priceRangeOptions)
                 {
@@ -111,17 +111,24 @@
                     }
                 }
 
+                for (const option of timeUsedOptions)
+                {
+                    if (option.getAttribute('data-time-used') == url.searchParams.get('timeUsed')) {
+                        document.getElementById('timeUsedTitle').innerHTML = `${timeUsedTitle}: ${option.innerHTML}`
+                    }
+                }
+
                 priceRangeOptions.forEach((element) => element.addEventListener('click', () => {
                     priceRangeTitleElement.innerHTML = `${priceRangeStartTitle}: ${element.innerHTML}`;
                     url.searchParams.set('priceRange', element.getAttribute('data-price-range'))
                     window.history.pushState({}, "", url)
                 }))
-                document.getElementById('sortPriceSelector').querySelectorAll('div').forEach((element) => element.addEventListener('click', () => {
-                    document.getElementById('sortPriceTitle').innerHTML = `${sortPriceTitle}: ${element.innerHTML}`
+                sortPriceOptions.forEach((element) => element.addEventListener('click', () => {
+                    sortTitle.innerHTML = `${sortPriceTitle}: ${element.innerHTML}`
                     url.searchParams.set('sortByPrice', element.getAttribute('data-sort-price'))
                     window.history.pushState({}, "", url)
                 }))
-                document.getElementById('timeUsedSelector').querySelectorAll('div').forEach((element) => element.addEventListener('click', () => {
+                timeUsedOptions.forEach((element) => element.addEventListener('click', () => {
                     document.getElementById('timeUsedTitle').innerHTML = `${timeUsedTitle}: ${element.innerHTML}`
                     url.searchParams.set('timeUsed', element.getAttribute('data-time-used'))
                     window.history.pushState({}, "", url)
@@ -136,103 +143,7 @@
                     url.searchParams.delete('priceRange')
                     url.searchParams.delete('sortByPrice')
                     url.searchParams.delete('timeUsed')
-                    url.searchParams.delete('sortByCreatedAt')
                     window.location.href = url
-                })
-
-                const sortByPrice = document.getElementById('sortByPrice');
-                switch (url.searchParams.get('sortByPrice')) {
-                    case '0':
-                        sortByPrice.querySelector('div.down').style.display = 'none';
-                        sortByPrice.querySelector('div.up').style.display = 'none';
-                        break;
-                    case '1':
-                        sortByPrice.querySelector('div.down').style.display = 'none';
-                        sortByPrice.querySelector('div.up').style.display = 'block';
-                        break;
-                    case '2':
-                        sortByPrice.querySelector('div.down').style.display = 'block';
-                        sortByPrice.querySelector('div.up').style.display = 'none';
-                        break;
-                    default:
-                        sortByPrice.querySelector('div.down').style.display = 'none';
-                        sortByPrice.querySelector('div.up').style.display = 'none';
-                        break;
-                }
-                sortByPrice.addEventListener('click', () => {
-                    switch (url.searchParams.get('sortByPrice'))
-                    {
-                        case '0':
-                            url.searchParams.set('sortByPrice', '1');
-                            window.history.pushState({}, "", url)
-                            sortByPrice.querySelector('div.down').style.display = 'none';
-                            sortByPrice.querySelector('div.up').style.display = 'block';
-                            break;
-                        case '1':
-                            url.searchParams.set('sortByPrice', '2');
-                            window.history.pushState({}, "", url)
-                            sortByPrice.querySelector('div.down').style.display = 'block';
-                            sortByPrice.querySelector('div.up').style.display = 'none';
-                            break;
-                        case '2':
-                            url.searchParams.set('sortByPrice', '0');
-                            window.history.pushState({}, "", url)
-                            sortByPrice.querySelector('div.down').style.display = 'none';
-                            sortByPrice.querySelector('div.up').style.display = 'none';
-                            break;
-                        default:
-                            url.searchParams.set('sortByPrice', '1');
-                            window.history.pushState({}, "", url)
-                            sortByPrice.querySelector('div.down').style.display = 'none';
-                            sortByPrice.querySelector('div.up').style.display = 'block';
-                    }
-                })
-                const sortByCreatedAt = document.getElementById("sortByCreatedAt")
-                switch (url.searchParams.get('sortByCreatedAt')) {
-                    case '0':
-                        sortByCreatedAt.querySelector('div.down').style.display = 'none';
-                        sortByCreatedAt.querySelector('div.up').style.display = 'none';
-                        break;
-                    case '1':
-                        sortByCreatedAt.querySelector('div.down').style.display = 'none';
-                        sortByCreatedAt.querySelector('div.up').style.display = 'block';
-                        break;
-                    case '2':
-                        sortByCreatedAt.querySelector('div.down').style.display = 'block';
-                        sortByCreatedAt.querySelector('div.up').style.display = 'none';
-                        break;
-                    default:
-                        sortByCreatedAt.querySelector('div.down').style.display = 'none';
-                        sortByCreatedAt.querySelector('div.up').style.display = 'none';
-                        break;
-                }
-                sortByCreatedAt.addEventListener('click', () => {
-                    switch (url.searchParams.get('sortByCreatedAt'))
-                    {
-                        case '0':
-                            url.searchParams.set('sortByCreatedAt', '1');
-                            window.history.pushState({}, "", url)
-                            sortByCreatedAt.querySelector('div.down').style.display = 'none';
-                            sortByCreatedAt.querySelector('div.up').style.display = 'block';
-                            break;
-                        case '1':
-                            url.searchParams.set('sortByCreatedAt', '2');
-                            window.history.pushState({}, "", url)
-                            sortByCreatedAt.querySelector('div.down').style.display = 'block';
-                            sortByCreatedAt.querySelector('div.up').style.display = 'none';
-                            break;
-                        case '2':
-                            url.searchParams.set('sortByCreatedAt', '0');
-                            window.history.pushState({}, "", url)
-                            sortByCreatedAt.querySelector('div.down').style.display = 'none';
-                            sortByCreatedAt.querySelector('div.up').style.display = 'none';
-                            break;
-                        default:
-                            url.searchParams.set('sortByCreatedAt', '1');
-                            window.history.pushState({}, "", url)
-                            sortByCreatedAt.querySelector('div.down').style.display = 'none';
-                            sortByCreatedAt.querySelector('div.up').style.display = 'block';
-                    }
                 })
             </script>
         </div>
@@ -249,8 +160,8 @@
                         <div class="flex ml-5 flex-col">
                             <span class="text-2xl block">{{ $product->name }}</span>
                             <span class="text-lg text-[#EC1B1B]">{{ number_format($product->price , 0, ',', '.') }}đ</span>
-                            <span class="text-lg text-black">{{ __('Danh mục: :category', ['category' => $product->name]) }}</span>
-                            <span class="text-lg text-black">{{ __('Thời gian sử dụng: :time', ['time' => '3 năm']) }}</span>
+                            <span class="text-lg text-black">{{ __('Danh mục: :category', ['category' => $product->category_by_word]) }}</span>
+                            <span class="text-lg text-black">{{ __('Thời gian sử dụng: :time', ['time' => $product->time_used_by_word]) }}</span>
                         </div>
                     </div>
                 </a>

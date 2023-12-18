@@ -11,6 +11,10 @@ class ProductVideo extends Model
 {
     use HasFactory, HasUuids;
 
+    protected $table = 'product_videos';
+
+    protected $primaryKey = 'video_id';
+
     protected $fillable = [
         'video_url',
         'product_id',

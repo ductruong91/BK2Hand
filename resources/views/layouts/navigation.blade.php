@@ -32,12 +32,17 @@
 
             <!-- Right content -->
             <div class="hidden sm:flex sm:items-center sm:ms-6 space-x-5">
+                @if(!request()->routeIs('product.create'))
                 <div>
-                    <button class="flex items-center bg-white shadow-sm py-3 px-2.5 rounded-lg">
-                        <span class="mr-2 text-2xl flex items-center justify-center"><i class="fi fi-bs-plus"></i></span>
+                    <a class="flex items-center bg-white shadow-sm py-3 px-2.5 rounded-lg"
+                        href="{{ route('product.create') }}">
+                        <span class="mr-2 text-2xl flex items-center justify-center">
+                            <i class="fi fi-bs-plus"></i>
+                        </span>
                         <span class="text-2xl font-bold block">{{ __('Đăng bài') }}</span>
-                    </button>
+                    </a>
                 </div>
+                @endif
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <a class="block mx-3">
