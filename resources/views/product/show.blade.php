@@ -72,7 +72,6 @@
                                 {{ __('Mô tả chi tiết') }}
                             </span>
                             <ul class="list-disc ml-5 text-xl">
-                                <li>{{ __('Thời gian đã sử dụng: :time_used', ['time_used' => $product->time_used_by_word]) }}</li>
                                 <li>{{ $product->description }}</li>
                             </ul>
                         </div>

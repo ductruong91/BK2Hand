@@ -170,6 +170,8 @@ class ProductController extends Controller
             ]);
         }
 
+        alert()->success(__('Thành công'), 'Sản phẩm của bạn đang được chờ duyệt');
+
         return redirect()->route('product.show', ['id' => $product->product_id]);
     }
 

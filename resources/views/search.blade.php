@@ -135,7 +135,8 @@
                 }))
 
                 document.getElementById('submitBtn').addEventListener('click', () => {
-                    window.location.href = window.location.href
+                    url.searchParams.delete('page')
+                    window.location.href = url
                 })
 
                 document.getElementById('resetBtn').addEventListener('click', () => {
