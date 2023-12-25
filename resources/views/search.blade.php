@@ -3,9 +3,9 @@
         <div class="flex justify-center items-center space-x-5">
 
             <div class="relative" onclick="toggleDropdown()">
-                <div class="py-2 px-7 bg-white text-base border border-[rgba(0,0,0,0.5)] rounded-md inline-flex items-center">
+                <button class="py-2 px-7 bg-white text-base border border-[rgba(0,0,0,0.5)] rounded-md inline-flex items-center">
                     <span id="priceRangeTitle" class="block leading-4 font-medium text-base px-2">{{ __('Giá')}}</span><i class= "fi fi-rr-caret-down px-2" ></i>
-                </div>
+                </button>
                 <div class="absolute z-50 mt-2 w-32 rounded-sm shadow-lg">
                     <div class="ring-1 ring-black ring-opacity-5 bg-white" id="priceRangeSelector" style="display:none;">
                         <div class="text-sm py-1 px-2" data-price-range="0">{{ __('Không')}}</div>
@@ -17,9 +17,9 @@
                 </div>
             </div>
             <div class="relative" onclick="togglePrice()">
-                <div class="py-2 px-7 bg-white text-base border border-[rgba(0,0,0,0.5)] rounded-md inline-flex items-center">
-                    <span id="sortPriceTitle" class="block leading-4 font-medium text-base px-2">{{ __('Sắp xếp') }}</span><i class= "fi fi-rr-caret-down px-2" ></i>
-                </div>
+                <button class="py-2 px-7 bg-white text-base border border-[rgba(0,0,0,0.5)] rounded-md inline-flex items-center">
+                    <span id="sortPriceTitle" class="block leading-4 font-medium text-base px-2">{{ __('Thứ tự sắp xếp') }}</span><i class= "fi fi-rr-caret-down px-2" ></i>
+                </button>
                 <div class="absolute z-50 mt-2 w-52 rounded-sm shadow-lg">
                     <div class="ring-1 ring-black ring-opacity-5 bg-white" id="sortPriceSelector" style="display:none;">
                         <div class="text-sm py-1 px-2" data-sort-price="0">{{ __('Không')}}</div>
@@ -33,9 +33,9 @@
 
             <!-- Time used -->
             <div class="relative" onclick="toggleTimeUsed()">
-                <div class="py-2 px-7 bg-white text-base border border-[rgba(0,0,0,0.5)] rounded-md inline-flex items-center">
+                <button class="py-2 px-7 bg-white text-base border border-[rgba(0,0,0,0.5)] rounded-md inline-flex items-center">
                     <span id="timeUsedTitle" class="block leading-4 font-medium text-base px-2">{{ __('Thời gian') }}</span><i class= "fi fi-rr-caret-down px-2" ></i>
-                </div>
+                </button>
                 <div class="absolute z-50 mt-2 w-44 rounded-sm shadow-lg">
                     <div class="ring-1 ring-black ring-opacity-5 bg-white" id="timeUsedSelector" style="display:none;">
                         <div class="text-sm py-1 px-2" data-time-used="0">{{ __('Không')}}</div>
@@ -77,7 +77,7 @@
                 const url = new URL(window.location.href);
                 const priceRangeStartTitle = "Giá";
                 const timeUsedTitle = "Thời gian";
-                const sortPriceTitle = "Sắp xếp";
+                const sortPriceTitle = "Thứ tự sắp xếp";
                 const priceRangeTitleElement = document.getElementById('priceRangeTitle')
                 const priceRangeSelector = document.getElementById('priceRangeSelector')
                 function toggleDropdown() {
@@ -161,8 +161,18 @@
                         <div class="flex ml-5 flex-col">
                             <span class="text-2xl block">{{ $product->name }}</span>
                             <span class="text-lg text-[#EC1B1B]">{{ number_format($product->price , 0, ',', '.') }}đ</span>
-                            <span class="text-lg text-black">{{ __('Danh mục: :category', ['category' => $product->category_by_word]) }}</span>
-                            <span class="text-lg text-black">{{ __('Thời gian sử dụng: :time', ['time' => $product->time_used_by_word]) }}</span>
+                            <span class="text-lg text-black">
+                                {{ __('Danh mục: :category', ['category' => $product->category_by_word]) }}
+                            </span>
+                            @if ($product->category_by_word != 'Chó' && $product->category_by_word != 'Mèo')
+                            <span class="text-lg text-black">
+                                {{ __('Thời gian sử dụng: :time', ['time' => $product->time_used_by_word]) }}
+                            </span>
+                            @else
+                            <span class="text-lg text-black">
+                                {{ __('Tuổi: :time', ['time' => $product->time_used_by_word]) }}
+                            </span>
+                            @endif
                         </div>
                     </div>
                 </a>

@@ -19,7 +19,7 @@
             <div class="flex items-center">
                 <form action="{{ route('product.search') }}" method="GET">
                     <div class="flex items-center py-2 px-4 border border-gray-700 bg-white rounded-full">
-                        <input name="keyword" type="text" placeholder="Search something..." 
+                        <input name="keyword" type="text" placeholder="Nhập từ khóa tìm kiếm" 
                             class="border-none focus:ring-0 focus:ring-offset-0 w-[500px]"
                             value="{{ request('keyword') }}"/>
                         <input name="cid" type="hidden" value="{{ request('cid') }}"/>
@@ -51,8 +51,8 @@
                     </x-slot>
 
                     <x-slot name="content">
-                        <x-dropdown-link :href="route('profile.edit')">
-                            {{ __('Profile') }}
+                        <x-dropdown-link :href="route('user.product')">
+                            {{ __('Quản lý sản phẩm') }}
                         </x-dropdown-link>
 
                         <!-- Authentication -->

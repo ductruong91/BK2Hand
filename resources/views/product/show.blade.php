@@ -3,54 +3,56 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="flex items-start justify-start">
                 <div class="w-[60%] my-3">
-                    <div id="main-image-carousel" class="carousel slide" data-bs-ride="carousel">
-                        <div class="carousel-indicators">
-                            <button type="button" data-bs-target="#main-image-carousel" data-bs-slide-to="0" class="active" aria-current="true"></button>
-                            @for ($i = 1; $i < count($product->images) + count($product->videos); $i++)
-                                <button type="button" data-bs-target="#main-image-carousel" data-bs-slide-to="{{ $i }}"></button>
-                            @endfor
+                    <div class="bg-white">
+                        <div id="main-image-carousel" class="carousel slide" data-bs-ride="carousel">
+                            <div class="carousel-indicators">
+                                <button type="button" data-bs-target="#main-image-carousel" data-bs-slide-to="0" class="active" aria-current="true"></button>
+                                @for ($i = 1; $i < count($product->images) + count($product->videos); $i++)
+                                    <button type="button" data-bs-target="#main-image-carousel" data-bs-slide-to="{{ $i }}"></button>
+                                @endfor
+                            </div>
+                            <div class="carousel-inner bg-white h-[550px]">
+                                <div class="carousel-item active">
+                                    <img src="{{ $product->images->first()->image_url }}" class="d-block max-h-[550px] w-full object-contain mx-auto">
+                                </div>
+                                @foreach($product->images->slice(1) as $image)
+                                <div class="carousel-item">
+                                    <img src="{{ $image->image_url }}" class="d-block max-h-[550px] w-full object-contain mx-auto">
+                                </div>
+                                @endforeach
+                                @foreach($product->videos as $video)
+                                <div class="carousel-item">
+                                    <video autoplay loop controls name="media" class="d-block max-h-[550px] w-full object-contain mx-auto">
+                                        <source src="{{ $video->video_url }}">
+                                    </video>
+                                </div>
+                                @endforeach
+                            </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#main-image-carousel" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" style="background-color: rgba(0,0,0,0.5);" aria-hidden="true"></span>
+                                <span class="hidden">{{ __('Previous') }}</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#main-image-carousel" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" style="background-color: rgba(0,0,0,0.5);" aria-hidden="true"></span>
+                                <span class="hidden">__{{ __('Next') }}</span>
+                            </button>
                         </div>
-                        <div class="carousel-inner bg-white h-[550px]">
-                            <div class="carousel-item active">
-                                <img src="{{ $product->images->first()->image_url }}" class="d-block max-h-[550px] w-full object-contain mx-auto">
-                            </div>
-                            @foreach($product->images->slice(1) as $image)
-                            <div class="carousel-item">
-                                <img src="{{ $image->image_url }}" class="d-block max-h-[550px] w-full object-contain mx-auto">
-                            </div>
+                        <div id="bottom-btn" class="flex items-center space-x-4 mt-3.5">
+                            <button type="button" data-bs-target="#main-image-carousel" data-bs-slide-to="0" class="bg-white">
+                                <img src="{{ $product->images->first()->image_url }}" class="max-h-[120px] w-full object-contain"/>
+                            </button>
+                            @foreach($product->images->slice(1) as $key => $image)
+                            <button type="button" data-bs-target="#main-image-carousel" data-bs-slide-to="{{ $key }}" class="bg-white">
+                                <img src="{{ $image->image_url }}" class="max-h-[120px] w-full object-contain"/>
+                            </button>
                             @endforeach
-                            @foreach($product->videos as $video)
-                            <div class="carousel-item">
-                                <video autoplay loop controls name="media" class="d-block max-h-[550px] w-full object-contain mx-auto">
-                                    <source src="{{ $video->video_url }}">
+                            @foreach($product->videos as $key => $video)
+                            <button type="button" data-bs-target="#main-image-carousel" data-bs-slide-to="{{ count($product->images) + $key }}" class="bg-white">
+                                <video muted class="max-h-[120px] w-full object-contain" src="{{ $video->video_url }}">
                                 </video>
-                            </div>
+                            </button>
                             @endforeach
                         </div>
-                        <button class="carousel-control-prev" type="button" data-bs-target="#main-image-carousel" data-bs-slide="prev">
-                            <span class="carousel-control-prev-icon" style="background-color: rgba(0,0,0,0.5);" aria-hidden="true"></span>
-                            <span class="hidden">{{ __('Previous') }}</span>
-                        </button>
-                        <button class="carousel-control-next" type="button" data-bs-target="#main-image-carousel" data-bs-slide="next">
-                            <span class="carousel-control-next-icon" style="background-color: rgba(0,0,0,0.5);" aria-hidden="true"></span>
-                            <span class="hidden">__{{ __('Next') }}</span>
-                        </button>
-                    </div>
-                    <div id="bottom-btn" class="flex items-center space-x-4 mt-3.5">
-                        <button type="button" data-bs-target="#main-image-carousel" data-bs-slide-to="0" class="bg-white">
-                            <img src="{{ $product->images->first()->image_url }}" class="max-h-[120px] w-full object-contain"/>
-                        </button>
-                        @foreach($product->images->slice(1) as $key => $image)
-                        <button type="button" data-bs-target="#main-image-carousel" data-bs-slide-to="{{ $key }}" class="bg-white">
-                            <img src="{{ $image->image_url }}" class="max-h-[120px] w-full object-contain"/>
-                        </button>
-                        @endforeach
-                        @foreach($product->videos as $key => $video)
-                        <button type="button" data-bs-target="#main-image-carousel" data-bs-slide-to="{{ count($product->images) + $key }}" class="bg-white">
-                            <video muted class="max-h-[120px] w-full object-contain" src="{{ $video->video_url }}">
-                            </video>
-                        </button>
-                        @endforeach
                     </div>
                     <div class="mt-3.5 py-8 px-5 bg-white">
                         <span class="block text-3xl font-bold">
@@ -63,9 +65,15 @@
                             <span class="block text-lg py-1">
                                 {{ __('Danh mục: :category_name', ['category_name' => $product->category_by_word]) }}
                             </span>
+                            @if ($product->category_by_word != 'Chó' && $product->category_by_word = 'Mèo')
                             <span class="block text-lg py-1">
                                 {{ __('Thời gian sử dụng: :time_used', ['time_used' => $product->time_used_by_word]) }}
                             </span>
+                            @else
+                            <span class="block text-lg py-1">
+                                {{ __('Tuổi: :time_used', ['time_used' => $product->time_used_by_word]) }}
+                            </span>
+                            @endif
                         </div>
                         <div class="">
                             <span class="block text-2xl font-bold">
@@ -93,6 +101,7 @@
                 </div>
             </div>
             <!-- Bài đăng tương tự -->
+            @if ($similarProducts->count())
             <div class="bg-white mt-3 p-3">
                 <h1 class="text-2xl font-bold leading-7">{{ __('Bài đăng tương tự') }}</h1>
                 <div class="flex items-center justify-evenly mt-4">
@@ -119,6 +128,7 @@
                     @endforeach
                 </div>
             </div>
+            @endif
         </div>
     </div>
     <script>

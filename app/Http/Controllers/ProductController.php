@@ -16,6 +16,7 @@ class ProductController extends Controller
     {
         try {
             $products = Product::with('images')
+                ->whereNot('status', '2')
                 ->latest()
                 ->paginate(10);
 
@@ -62,6 +63,7 @@ class ProductController extends Controller
             }
 
             $products = Product::with('categories', 'images')
+                ->whereNot('status', '2')
                 ->when($request->keyword, function ($query) use ($request, $result) {
                     $query->where('products.name', 'REGEXP', $result);
                 })
@@ -123,6 +125,7 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
+        $request['price'] = preg_replace("/[^0-9]/", "", $request['price']);
         $request->validate([
             'category_id' => ['required', 'string', 'exists:categories,category_id'],
             'title' => ['required', 'string', 'max:30'],
@@ -172,7 +175,7 @@ class ProductController extends Controller
 
         alert()->success(__('Thành công'), 'Sản phẩm của bạn đang được chờ duyệt');
 
-        return redirect()->route('product.show', ['id' => $product->product_id]);
+        return redirect()->route('homepage');
     }
 
     public function show($id)
@@ -212,16 +215,65 @@ class ProductController extends Controller
 
     public function edit(Product $product)
     {
+        // $product->status = '1';
+        // $product->save();
 
+        // alert()->success(__('Thành công'), 'Đã cập nhật trạng thái sản phẩm');
+
+        // return redirect()->back();
+    }
+
+    public function manage(Request $request)
+    {
+        $user = $request->user();
+        $products = Product::with(['images', 'user'])
+            ->where('user_id', $user->user_id)
+            ->whereNot('status', '2')
+            ->when($request->status == '0' || $request->status == '1', function ($query) use ($request) {
+                $query->where('status', $request->status);
+            })
+            ->orderBy('created_at','desc')
+            ->paginate(5);
+
+        return view('manage', [
+            'products' => $products->appends(request()->except('page')),
+        ]);
+    }
+
+    public function apiManage(Request $request)
+    {
+        $user = $request->user();
+        $products = Product::with(['images', 'user'])
+            ->where('user_id', $user->user_id)
+            ->paginate(5);
+
+        foreach($products as $product) {
+            $product['price'] = number_format($product->price , 0, ',', '.') . "đ";
+            $product['category_by_word'] = $product->category_by_word;
+            $product['time_used_by_word'] = $product->time_used_by_word;
+        }
+
+        return response()->json([
+            'data' => $products,
+        ], 200);
     }
 
     public function update(Request $request, Product $product)
     {
+        $product->status = '1';
+        $product->save();
 
+        alert()->success(__('Thành công'), 'Đã cập nhật trạng thái sản phẩm');
+
+        return redirect()->back();
     }
 
     public function destroy(Product $product)
     {
+        $product->delete();
+        
+        alert()->success(__('Thành công'), 'Đã cập nhật trạng thái sản phẩm');
 
+        return redirect()->back();
     }
 }

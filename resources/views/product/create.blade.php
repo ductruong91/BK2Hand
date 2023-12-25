@@ -101,9 +101,8 @@
                 <div class="w-[55%] my-3 mx-4">
                     <div class="flex flex-col items-start w-[532px]">
                         <div data-bs-toggle="modal" data-bs-target="#categoryModal"
-                            class="w-full h-[69px] border border-black rounded-xl flex items-center cursor-pointer"
-                            data-toggle="modal" data-target="#categoryModal">
-                            <input id="category" type="hidden" value="" name="category_id"/>
+                            class="w-full h-[69px] border border-black rounded-xl flex items-center cursor-pointer">
+                            <input id="category" type="hidden" value="{{ old('category_id') }}" name="category_id"/>
                             <div class="flex items-center justify-between px-4 w-full">
                                 <span id="category_name" class="text-2xl pl-5">{{ __('Danh mục sản phẩm') }}</span>
                                 <span class="text-4xl block"><i class= "fi fi-sr-caret-down" ></i></span>
@@ -138,9 +137,10 @@
                                 </select>
                             </div>
                             <div class="w-[168px] h-[69px] border border-[rgba(0,0,0,0.32)] rounded-xl px-2 py-1 flex items-center">
-                                <input name="price" type="number" value="{{ old('price') }}" autofocus
+                                <input name="price" type="text" value="{{ old('price') }}" autofocus
                                         class="border-none focus:ring-0 focus:ring-offset-0 w-full placeholder:text-lg placeholder:text-[rgba(0,0,0,0.52)] text-lg" 
                                         placeholder="Giá"/>
+                                <span class="text-gray-400">VND</span>
                             </div>
                         </div>
                         @error('time_used')
@@ -150,8 +150,8 @@
                             <div class="text-base text-red-600">{{ $message }}</div>
                         @enderror
                         <div class="mt-8 w-[535px] h-[203px] border border-[rgba(0,0,0,0.32)] rounded-xl px-2 py-1 flex items-center">
-                            <textarea name="description" cols="50" rows="6" placeholder="Mô tả chi tiết"
-                                class="border-none focus:ring-0 focus:ring-offset-0 placeholder:text-lg"></textarea>
+                            <textarea name="description" cols="50" rows="6" placeholder="Mô tả chi tiết" value="{{ old('description') }}"
+                                class="border-none focus:ring-0 focus:ring-offset-0 placeholder:text-lg">{{ old('description') }}</textarea>
                         </div>
                         @error('description')
                             <div class="text-base text-red-600">{{ $message }}</div>
@@ -176,6 +176,17 @@
                 categoryName.innerHTML = 'Danh mục sản phẩm: ' + newCategoryName
                 categoryInput.value = newCategoryId;
             })
+        })
+        if (categoryInput.value) {
+            axios.get('/api/categories/' + categoryInput.value)
+                .then(res => categoryName.innerHTML = 'Danh mục sản phẩm: ' + res.data.name)
+                .catch(err => console.log(err))
+        }
+        const priceInput = $('input[name="price"]');
+        priceInput.on('input', function() {
+            let value = $(this).val().replace(/[^0-9]/g, '')
+            value = value.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+            $(this).val(value);
         })
     </script>
     <script>

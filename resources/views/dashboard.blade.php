@@ -21,10 +21,10 @@
                 </div>
             </div>
 
-            <h1 class="text-2xl font-bold mb-3 mt-5">{{ __('Bài đăng mới') }}</h1>
-            <div class="overflow-hidden grid grid-cols-5 gap-y-5 gap-x-8">
+            <h1 class="text-2xl font-bold mb-1 mt-5">{{ __('Bài đăng mới') }}</h1>
+            <div class="overflow-hidden grid grid-cols-5 gap-y-5 gap-x-8 py-3 px-3">
                 @foreach($products as $product)
-                <a class="border border-[#897272] bg-white block pt-4 hover:scale-105"
+                <a class="border border-[#897272] bg-white block pt-4 hover:shadow-xl"
                     href="{{ route('product.show', ['id' => $product->product_id]) }}">
                     <div class="w-[174px] h-[156px] mx-auto mt-4">
                         <img class="max-w-full max-h-full mx-auto" src="{{$product->images->first()->image_url}}"/>

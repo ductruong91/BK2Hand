@@ -1,4 +1,5 @@
 import './bootstrap';
+import './firebase';
 import jQuery from 'jquery';
 import { popper } from '@popperjs/core';
 window.$ = jQuery;

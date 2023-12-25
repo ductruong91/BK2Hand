@@ -17,4 +17,9 @@ class CategoryController extends Controller
             'data' => $categories,
         ], 200);
     }
+
+    public function show(Category $category)
+    {
+        return response()->json($category, 200);
+    }
 }
