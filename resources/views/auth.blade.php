@@ -9,7 +9,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('auth.confirm') }}" method="POST">
+                    <form action="{{ route('auth.confirm') }}" method="POST" id="login-form">
                     @csrf
                         <div class="w-full flex flex-col items-center">
                             <div>
@@ -17,9 +17,9 @@
                             </div>
                             <input id="email-confirm" type="hidden" name="email" value="{{ old('email') }}"/>
                             <span class="w-full block text-center text-xl">{{ __('Nhập mã bạn vừa nhận để xác nhận') }}</span>
-                            <x-text-input id="code" class="block mt-1 w-full" name="code" autofocus />
-                            <x-input-error :messages="$errors->get('code')" class="mt-2" id="code-error-message" />
-                            <x-primary-button class="ms-3 mt-4 !bg-[#EC1B1B] !text-2xl !font-bold !normal-case !px-4">
+                            <x-text-input id="code" class="block mt-1 w-full" name="code" autofocus autocomplete="off" />
+                            <span class="text-sm text-red-600 dark:text-red-400 space-y-1 mt-2" id="code-error"></span>
+                            <x-primary-button id="code-btn" class="ms-3 mt-4 !bg-[#EC1B1B] !text-2xl !font-bold !normal-case !px-4" onclick="event.preventDefault();">
                                 {{ __('Nhập mã') }}
                             </x-primary-button>
                         </div>
@@ -41,7 +41,8 @@
     <span class="w-full block text-center text-xl">{{ __('Nhập email của bạn để nhận mã xác thực') }}</span>
     <div>
         <x-text-input id="email" class="block mt-1 w-full" name="email" :value="old('email')" autofocus />
-        <x-input-error :messages="$errors->get('email')" class="mt-2" />
+        <span class="text-sm text-red-600 dark:text-red-400 space-y-1 mt-2" id="email-error">
+        </span>
     </div>
 
     <div class="flex items-center justify-center mt-4">
@@ -53,7 +54,6 @@
         <button class="hidden" id="trigger-modal" data-bs-toggle="modal" data-bs-target="#confirmModal"></button>
     </div>
     <script type="module">
-        
         $('#generate-btn').click(function () {
             $('#spinner').css('display', 'block')
             axios.post('/api/authenticate',
@@ -68,7 +68,29 @@
                     $('#trigger-modal').click()
                 }
             })
-            .catch(err => console.log(err))
+            .catch(err => {
+                $('#spinner').css('display', 'none')
+                console.log(err)
+                document.getElementById('email-error').innerHTML = err?.response?.data?.message?.email
+            })
+        })
+
+        $('#code-btn').click(function () {
+            axios.post(
+                '/api/code-check',
+                {
+                    email: $('#email').val(),
+                    code: $('#code').val()
+                }
+            )
+            .then(res => {
+                document.getElementById('code-error').innerHTML = ''
+                document.getElementById('login-form').submit()
+            })
+            .catch(err => {
+                console.log(err)
+                document.getElementById('code-error').innerHTML = err?.response?.data?.message
+            })
         })
     </script>
 </x-guest-layout>

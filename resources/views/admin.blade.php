@@ -261,13 +261,15 @@
                     checkboxes.each(function() {
                         productIds.push($(this).attr('data-product-id'))
                     })
-                    for (const productId of productIds)
-                    {
-                        axios.delete('/api/admin/products/' + productId)
-                            .then(res => console.log(res))
+                    if (productIds.length) {
+                        axios.post(
+                            '/api/admin/products',
+                            {
+                                productIds: productIds
+                            })
+                            .then(res => window.location.reload())
                             .catch(err => console.log(err))
                     }
-                    window.location.reload()
                 })
             } else {
                 const productId = event.relatedTarget.getAttribute('data-product-id')

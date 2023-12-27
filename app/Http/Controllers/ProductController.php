@@ -126,6 +126,7 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $request['price'] = preg_replace("/[^0-9]/", "", $request['price']);
+
         $request->validate([
             'category_id' => ['required', 'string', 'exists:categories,category_id'],
             'title' => ['required', 'string', 'max:30'],
@@ -133,8 +134,8 @@ class ProductController extends Controller
             'price' => ['required', 'numeric', 'min:1000'],
             'description' => ['required', 'string', 'max:255'],
             'images' => ['required'],
-            'images.*' => ['file','mimes:jpg,jpeg,png', 'max:1024'],
-            'video' => ['nullable', 'file', 'mimes:mp4,wmv,avi,mpeg'],
+            'images.*' => ['string', 'max:255', 'required', 'url:http,https'],
+            'video' => ['nullable', 'string', 'max:255', 'url:http,https'],
             'unit' => ['required', 'numeric', Rule::in(['0', '1'])],
         ]);
 
@@ -150,28 +151,41 @@ class ProductController extends Controller
 
         $product->categories()->attach($request->category_id);
 
-        if ($request->hasFile('images')) {
-            foreach($request->file('images') as $image) {
-                $filename = uniqid('image_') . '.' . $image->getClientOriginalExtension();
+        // if ($request->hasFile('images')) {
+        //     foreach($request->file('images') as $image) {
+        //         $filename = uniqid('image_') . '.' . $image->getClientOriginalExtension();
 
-                $image->storeAs('images', $filename, 'public');
-                $fileUrl = Storage::url("images/{$filename}");
-                $product->images()->create([
-                    'image_url' => $fileUrl,
-                ]);
-            }
-        }
+        //         $image->storeAs('images', $filename, 'public');
+        //         $fileUrl = Storage::url("images/{$filename}");
+        //         $product->images()->create([
+        //             'image_url' => $fileUrl,
+        //         ]);
+        //     }
+        // }
 
-        if ($request->hasFile('video')) {
-            $uploadedVideo = $request->file('video');
-            $filename = uniqid('video_') .'.'. $uploadedVideo->getClientOriginalExtension();
-            $uploadedVideo->storeAs('videos', $filename, 'public');
-            $fileUrl = Storage::url("videos/{$filename}");
-
-            $product->videos()->create([
-                'video_url' => $fileUrl,
+        foreach ($request->images as $image) {
+            $product->images()->create([
+                'image_url' => $image,
             ]);
         }
+
+        if ($request->video)
+        {
+            $product->videos()->create([
+                'video_url' => $request->video,
+            ]);
+        }
+
+        // if ($request->hasFile('video')) {
+        //     $uploadedVideo = $request->file('video');
+        //     $filename = uniqid('video_') .'.'. $uploadedVideo->getClientOriginalExtension();
+        //     $uploadedVideo->storeAs('videos', $filename, 'public');
+        //     $fileUrl = Storage::url("videos/{$filename}");
+
+        //     $product->videos()->create([
+        //         'video_url' => $fileUrl,
+        //     ]);
+        // }
 
         alert()->success(__('Thành công'), 'Sản phẩm của bạn đang được chờ duyệt');
 

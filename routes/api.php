@@ -30,11 +30,12 @@ Route::middleware('auth:sanctum')->group(function () {
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::put('/admin/products', [AdminProductController::class,'update']);
-    Route::delete('/admin/products/{product}', [AdminProductController::class,'destroy']);
+    Route::post('/admin/products', [AdminProductController::class,'destroySelected']);
 });
 
 Route::middleware('guest')->group(function () {
     Route::post('/authenticate', [AuthController::class,'authenticate'])->name('authenticate');
+    Route::post('/code-check', [AuthController::class, 'checkCode'])->name('code-check');
 });
 
 Route::get('/categories', [CategoryController::class,'index'])->name('category.index');

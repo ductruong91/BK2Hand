@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Models\Category;
+use Exception;
 use Illuminate\Http\Request;
 
 class AdminProductController extends Controller
@@ -56,11 +57,31 @@ class AdminProductController extends Controller
         return redirect()->back();
     }
 
+    public function destroySelected(Request $request)
+    {
+        try {
+            $productIds = $request->productIds;
+            $products = Product::whereIn('product_id', $productIds)
+                ->get();
+    
+            foreach ($products as $product) {
+                $product->delete();
+            }
+    
+            alert()->success(__('Thành công'), 'Đã xóa tất cả sản phẩm được chọn');
+    
+            return response()->json(true, 200);
+        } catch (Exception $e)
+        {
+            return response()->json($e->getMessage(), 400);
+        }
+    }
+
     public function destroy(Product $product)
     {
         $product->delete();
 
-        alert()->success(__('Thành công'), 'Đã xóa tất cả sản phẩm được chọn');
+        alert()->success(__('Thành công'), 'Đã xóa sản phẩm');
 
         return redirect()->back();
     }

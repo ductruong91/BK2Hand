@@ -10,15 +10,23 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use App\Providers\RouteServiceProvider;
+use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
     public function authenticate(Request $request)
     {
         try {
-            $request->validate([
+            $validator = Validator::make($request->all(), [
                 'email' => ['required', 'email', 'string', 'max:255'],
             ]);
+
+            if ($validator->fails()) {
+                return response()->json([
+                    'message' => $validator->errors(),
+                    'success' => false,
+                ], 400);
+            }
     
             $foundUser = User::where('email', $request->email)
                 ->first();
@@ -66,6 +74,26 @@ class AuthController extends Controller
             return redirect()->back()->withErrors([
                 'code' => 'Sai mã xác nhận',
             ]);
+        }
+    }
+
+    public function checkCode(Request $request)
+    {
+        $request->validate([
+            'code' => ['required', 'string', 'max:6'],
+            'email' => ['required', 'string', 'email'],
+        ]);
+
+        $user = User::where('email', $request->email)
+            ->first();
+
+        if (Hash::check($request->code, $user->password)) {
+            return response()->json(true, 200);
+        }
+        else {
+            return response()->json([
+                'message' => 'Sai mã xác nhận',
+            ], 400);
         }
     }
 }
