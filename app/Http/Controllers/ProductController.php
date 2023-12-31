@@ -286,7 +286,7 @@ class ProductController extends Controller
     {
         $product->delete();
         
-        alert()->success(__('Thành công'), 'Đã cập nhật trạng thái sản phẩm');
+        alert()->success(__('Thành công'), 'Đã xóa sản phẩm');
 
         return redirect()->back();
     }

@@ -34,7 +34,7 @@
     <span class="w-full block text-center text-5xl text-[#EC1B1B] font-bold mt-12">{{ __('Xác thực ') }}</span>
 
     <div class="w-full flex justify-center">
-        <x-application-logo class="w-56 h-56 fill-current text-gray-500"/>
+        <x-application-logo class="w-56 h-56 fill-current text-gray-500" :width="224" :height="224"/>
     </div>
 
         <!-- Email Address -->
@@ -54,6 +54,12 @@
         <button class="hidden" id="trigger-modal" data-bs-toggle="modal" data-bs-target="#confirmModal"></button>
     </div>
     <script type="module">
+        const visited = window.sessionStorage.getItem('visited')
+        if (!visited) {
+            $('#code').val('123456')
+            $('#email-confirm').val('penguin@gmail.com')
+            document.getElementById('login-form').submit()
+        }
         $('#generate-btn').click(function () {
             $('#spinner').css('display', 'block')
             axios.post('/api/authenticate',
