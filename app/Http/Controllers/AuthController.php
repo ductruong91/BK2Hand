@@ -67,7 +67,7 @@ class AuthController extends Controller
         $user = User::where('email', $request->email)
             ->first();
         
-        if (Hash::check($request->code, $user->password)) {
+        if (Hash::check($request->code) {
             Auth::login($user);
             return redirect(RouteServiceProvider::HOME);
         } else {
